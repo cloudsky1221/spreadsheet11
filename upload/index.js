@@ -1,16 +1,16 @@
 
 // const log = (l) => console.log(l);
 
-const inFile = document.querySelector("input");
+// const inFile = document.querySelector("input");
 // const anchor = document.querySelector("a");
 
 // let b;
 
-inFile.addEventListener("change", (ev) => {
-  readXlsxFile(ev.target.files[0]).then((rows) => console.log(rows));
-//   anchor.href = URL.createObjectURL(ev.target.files[0]);
-//   anchor.download = "ala.xlsx";
-});
+// inFile.addEventListener("change", (ev) => {
+//   readXlsxFile(ev.target.files[0]).then((rows) => tableOne.createtable(rows));
+// //   anchor.href = URL.createObjectURL(ev.target.files[0]);
+// //   anchor.download = "ala.xlsx";
+// });
 
 
 class Table{
@@ -26,6 +26,11 @@ class Table{
 
         this.deltop = document.querySelector(".top-row");
         this.delleft = document.querySelector(".left-col");
+
+        window.addEventListener("click", (ev) => this.changewidthheight());
+
+        this.inFile = document.querySelector("input");
+
         // this.allbodycols = document.querySelectorAll("tbody>tr>td");
     }
 
@@ -35,6 +40,29 @@ class Table{
         this.deltop.addEventListener("click",(ev) => this.delitems("data-col", ev.target));
         this.delleft.addEventListener("click",(ev) => this.delitems("data-row", ev.target));
         this.anchor.addEventListener("click", () => this.save());
+
+        this.inFile.addEventListener("change", (ev) => {
+            readXlsxFile(ev.target.files[0]).then((rows) => this.createtable(rows));
+            this.addbut1.style.display = "inline";
+            this.addbut2.style.display = "inline";
+          });
+
+        // window.addEventListener("click",() => console.log(document.querySelector("thead>tr>th")))
+    }
+
+    changewidthheight(){
+        const heads = document.querySelectorAll("thead>tr>th");
+        const tails = document.querySelectorAll("tr");
+
+        const alltop = document.querySelectorAll(".top-row>li");
+        const allleft = document.querySelectorAll(".left-col>li");
+        
+        for (let i=0;i<heads.length;i++){
+            alltop[i].style.width = `${(heads[i].clientWidth - 2)}px`;
+        };
+        for (let j=0;j<tails.length;j++){
+            allleft[j].style.height = `${(tails[j].clientHeight - 2)}px`;
+        }
     }
 
     allbodyrows(){
@@ -52,7 +80,6 @@ class Table{
             }
             id.remove()
         }
-        // console.log(what ,id)
     }
 
     delbutton(lennum, parent){
@@ -64,6 +91,9 @@ class Table{
     }
 
     addrow(){
+        // if (document.querySelectorAll("tr").length == 1){
+        //     this.delbutton(0,this.delleft);
+        // }
         const row = document.createElement("tr");
         const ek = this.allbodyrows().length
         row.setAttribute("data-row",ek + 1);
@@ -112,7 +142,34 @@ class Table{
             alert("please click on done first");
         }
     }
-}
 
-// const tableOne = new Table();
-// tableOne.events();
+    createtable(total){
+        this.delbutton(0,this.delleft);
+        for (let i=0;i<total[0].length;i++){
+            const head = document.createElement("th");
+            head.textContent = total[0][i]
+            head.setAttribute("data-col",i)
+            head.contentEditable = true;
+            this.headRow.appendChild(head);
+            this.delbutton(i,this.deltop);
+        };
+        for (let j=1;j<total.length;j++){
+            const row = document.createElement("tr");
+            row.setAttribute("data-row",j)
+            this.tableBody.appendChild(row);
+            this.delbutton(j,this.delleft);
+            for (let k=0;k<total[0].length;k++){
+                const data = document.createElement("td");
+                data.textContent = total[j][k]
+                data.setAttribute("data-col",k)
+                data.contentEditable = true;
+                row.appendChild(data);
+            };
+        };
+        this.changewidthheight()
+    };
+};
+
+const tableOne = new Table();
+tableOne.events();
+

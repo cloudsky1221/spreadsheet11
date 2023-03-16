@@ -21,6 +21,22 @@ class Table{
         this.deltop.addEventListener("click",(ev) => this.delitems("data-col", ev.target));
         this.delleft.addEventListener("click",(ev) => this.delitems("data-row", ev.target));
         this.anchor.addEventListener("click", () => this.save());
+        window.addEventListener("click", (ev) => this.changewidthheight());
+    }
+
+    changewidthheight(){
+        const heads = document.querySelectorAll("thead>tr>th");
+        const tails = document.querySelectorAll("tr");
+
+        const alltop = document.querySelectorAll(".top-row>li");
+        const allleft = document.querySelectorAll(".left-col>li");
+        
+        for (let i=0;i<heads.length;i++){
+            alltop[i].style.width = `${(heads[i].clientWidth - 2)}px`;
+        };
+        for (let j=0;j<tails.length;j++){
+            allleft[j].style.height = `${(tails[j].clientHeight - 2)}px`;
+        }
     }
 
     allbodyrows(){
@@ -135,4 +151,4 @@ const tableOne = new Table();
 // tableOne.update();
 tableOne.events();
 
-console.log(writeXlsxFile)
+// console.log(writeXlsxFile)

@@ -87,3 +87,6 @@ body {
     cursor: pointer;
   }
   
+  .one, .two {
+    display: none;
+  }

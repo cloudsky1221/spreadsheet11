@@ -1,0 +1,104 @@
+@import url('https://fonts.googleapis.com/css2?family=Saira:wght@400;700;800&display=swap');
+
+body {
+    margin: 0;
+    padding: 0;
+    /* height: 100vh; */
+    /* height: 100dvh; */
+    /* width: 100vw; */
+    /* width: 100dvw; */
+    display: flex;
+    flex-direction: column;
+    font-family: 'Saira', sans-serif;
+}
+
+header {
+    height: 4rem;
+    /* width: 100vw; */
+    /* width: 100dvw; */
+    background-color: #4285F4;
+}
+
+header>nav {
+    margin: auto;
+    width: 90%;
+    display: flex;
+    justify-content: space-between;
+}
+
+header>nav>ul {
+    margin: 0;
+    padding: 0;
+    height: 4rem;
+    width: 28rem;
+    list-style: none;
+    color: white;
+    font-size: 1.5rem;
+    /* font-weight: bold; */
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+/* main {
+    flex: 1;
+} */
+
+main>section {
+    margin-top: 5rem;
+    height: 38rem;
+    /* width: 100vw;
+    width: 100dvw; */
+    background-image: url(./assets/back.png);
+    /* background-size: auto; */
+    background-size: cover;
+}
+
+main>section>ul {
+    margin: auto;
+    padding: 1.5rem 0 0 0;
+    width: 62rem;
+    list-style: none;
+}
+
+h1 {
+    font-size: 3rem;
+    font-style: normal;
+    font-weight: 800;
+    /* font-weight: bolder; */
+    color: white;
+    text-align: center;
+    line-height: 1.2;
+}
+h1>span {
+    color: #F27F0C;
+}
+
+.middle {
+    height: 12rem;
+}
+
+main>section>ul>li>.links {
+    margin: auto;
+    width: 60%;
+    display: flex;
+    justify-content: space-around;
+}
+main>section>ul>li>.links>a {
+    text-decoration: none;
+    padding: 0.6rem;
+    height:2rem;
+    width: 12rem;
+    border-radius: 1rem;
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-align: center;
+}
+main>section>ul>li>.links>:first-child {
+    color: #fff;
+    background-color: #DB4437;
+}
+main>section>ul>li>.links>:last-child {
+    color: #004FD7;
+    background-color: #fff;
+}
